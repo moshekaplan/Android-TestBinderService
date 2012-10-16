@@ -8,7 +8,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.widget.Toast;
 
-public class LocalService extends Service {
+public class LocalService extends Service implements ILocalService{
     // Binder given to clients
     private final IBinder mBinder = new LocalBinder();
     // Random number generator
@@ -21,6 +21,7 @@ public class LocalService extends Service {
 		Toast.makeText(this, "Service created...", Toast.LENGTH_LONG).show();
 	}
 
+    // Effectively return a reference to ourself
     @Override
     public IBinder onBind(Intent intent) {
     	Toast.makeText(this, "Service bound...", Toast.LENGTH_LONG).show();
@@ -32,7 +33,7 @@ public class LocalService extends Service {
      * runs in the same process as its clients, we don't need to deal with IPC.
      */
     public class LocalBinder extends Binder {
-        LocalService getService() {
+    	ILocalService getService() {
             // Return this instance of LocalService so clients can call public methods
             return LocalService.this;
         }

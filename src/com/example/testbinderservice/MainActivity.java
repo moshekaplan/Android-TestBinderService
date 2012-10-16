@@ -17,17 +17,13 @@ public class MainActivity extends Activity {
 	// A reference to the service.
 	// We'll call methods belonging to this instance to communicate with the Service
 	// The ServiceConnection will populate this and mBound after it connects
-    private LocalService mService;
+    private ILocalService mService = null;
     
 	// True if mService is bound to a service
 	private boolean mBound = false;
 	
     // Getters and setters are needed for the ServiceConnection
-    public LocalService getmService() {
-		return mService;
-	}
-
-	public void setmService(LocalService mService) {
+	public void setmService(ILocalService mService) {
 		this.mService = mService;
 	}
 
@@ -39,8 +35,6 @@ public class MainActivity extends Activity {
 		this.mBound = mBound;
 	}
 
-	
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +45,9 @@ public class MainActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+        // Create an Intent to represent a LocalService 
         Intent intent = new Intent(this, com.example.testbinderservice.LocalService.class);
+        // Bind a LocalService to our ServiceConnection
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
     }
 
