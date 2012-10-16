@@ -1,4 +1,4 @@
-Android-Code
+Android-TestBinderService
 ============
 
-Small Android programs to highlight small pieces of functionality. Full Repo included.
+Small Android program to highlight how to bind to a Service.
